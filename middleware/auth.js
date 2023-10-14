@@ -8,11 +8,11 @@ function verifikasi(req, res, next) {
     res.status(401).json({
       message: "Unauthorized",
     });
+  } else {
+    // jika ada token, lakukan verifikasi token
+    verifyToken(token);
+    next();
   }
-
-  //   jika ada token, lakukan verifikasi token
-  verifyToken(token);
-  next();
 }
 
 module.exports = verifikasi;

@@ -3,6 +3,7 @@ const { generateToken } = require("../token");
 const verifikasi = require("../middleware/auth");
 const fs = require("fs");
 const path = require("path");
+const { log } = require("console");
 
 // route home
 router.get("/", (req, res) => {
@@ -32,22 +33,22 @@ router.post("/login", (req, res) => {
     res.status(404).json({
       message: "Username atau password salah",
     });
+  } else {
+    //   ambil data sebagai data token
+    const dataToken = {
+      id: data.id,
+      username: data.username,
+    };
+
+    //   lakukan generate token
+    const token = generateToken(dataToken);
+
+    //   kirim response
+    res.status(200).json({
+      message: "Login berhasil",
+      token: token,
+    });
   }
-
-  //   ambil data sebagai data token
-  const dataToken = {
-    id: data.id,
-    username: data.username,
-  };
-
-  //   lakukan generate token
-  const token = generateToken(dataToken);
-
-  //   kirim response
-  res.status(200).json({
-    message: "Login berhasil",
-    token: token,
-  });
 });
 
 // route menampilkan data teachers
