@@ -3,7 +3,6 @@ const { generateToken } = require("../token");
 const verifikasi = require("../middleware/auth");
 const fs = require("fs");
 const path = require("path");
-const { log } = require("console");
 
 // route home
 router.get("/", (req, res) => {
